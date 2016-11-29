@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    include usernav 
+    .container
+        .row
+            .col-lg-12.text-center(style='padding-left:20%; padding-right:20%;')
+                h1#stockPageHeader Update Stock
+                .input-group(style='margin-top: 40px;')
+                    input#stockInputField.form-control(type='text', readonly, aria-label='...', placeholder='Select Medication to update')
+                    .input-group-btn
+                        button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                            | Select 
+                            span.caret
+                        ul#stockListId.dropdown-menu.dropdown-menu-right
+                p#p_clinicName(style='margin-top: 40px; font-size: 12px;') Hint: Number of items to add or remove
+                .col-lg-4
+                .input-group.col-lg-4
+                    span.input-group-btn
+                        button#stockMinusBtn.btn.btn-danger(type='button')
+                            span.glyphicon.glyphicon-minus(aria-hidden='true')
+                    p#stockCountText(style='font-size: 74px; font-weight: 100;') 0
+                    span.input-group-btn
+                        button#stockPlusBtn.btn.btn-success(type='button')
+                            span.glyphicon.glyphicon-plus(aria-hidden='true')
+                form#stockForm(action = 'http://localhost:3000/api/stock')
+                    button.btn.btn-default(type='submit')  Update 
+                h4#stockOnHand(style = "margin-top: 40px") 0 Stock Selected
+                .col-lg-4
+                div

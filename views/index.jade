@@ -1,5 +1,15 @@
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block noheader
+    .container
+        .row
+        .col-lg-12.text-center(style='padding-left:20%; padding-right:20%;')
+            h1#checkInPageHeader Select Clinic
+            .input-group(style='margin-top: 40px;')
+                input#checkInInputField.form-control(type='text', readonly, aria-label='...', placeholder='Select clinic')
+                .input-group-btn
+                    button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Clinic 
+                        span.caret
+                    ul#clinicListId.dropdown-menu.dropdown-menu-right
+    

@@ -1,0 +1,20 @@
+extends layout
+
+block noheader
+	include adnav
+	.container
+		.col-lg-12.text-center(style='padding-left:20%; padding-right:20%;')
+			h1#clinicsPageHeader Registered Clinics
+			.btn-group.pull-left(role='group', style='margin-bottom: 20px;margin-top: 40px')
+				button.btn.btn-default(type='button') Add New
+				button.btn.btn-default(type='button') Remove
+			table#clinicsTable.table(style='margin-top: 40px; text-align: left')
+				thead
+					tr
+						th #
+						th Clinic
+						th Country
+						th Stock
+				tbody#clinicsTableBody
+
+	script(type='text/javascript', src='/javascripts/adhome.js')
