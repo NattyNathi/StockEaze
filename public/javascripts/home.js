@@ -4,16 +4,18 @@ var homePage = (function(){
      * @desc module's data model object to hold current clinic's info
      */
     var dModel = {
-        stockName: ' ',
-        clinicName: ' '
+        userName: null,
+        stockName: null,
+        clinicName: null
     };
 
     /**
      * @desc setter method for the module's clinic info data model'
      */
-    var setDataModel = function(stock, clinic){
+    var setDataModel = function(stock, clinic, user){
         dModel.stockName = stock;
         dModel.clinicName = clinic;
+        dModel.userName = user;
     };
 
     /**
@@ -24,6 +26,10 @@ var homePage = (function(){
     var loadStockList = function(){
         var items = [];
         var data;
+
+        //update 'logged into' clinic on ui
+        $("#checkInId").text(dModel.clinicName);
+        $("#userId").text(dModel.userName);
 
         $.ajax({
             type: "GET",
@@ -49,12 +55,13 @@ var homePage = (function(){
      */
     var listSelect = function(){
         $("#stockInputField").val($(this).text());
-
+        dModel.stockName = $(this).text();
         $.ajax({
             type: "GET",
             url: 'http://localhost:3000/api/stock/count?name=' + dModel.stockName + '&clinic=' + dModel.clinicName,
             dataType: "json",
             success: function(res){
+                console.log('response ' + JSON.stringify(res));
                 var count = res[0].StockCount;
                 $("#stockOnHand").text(count.toString() + ' Items in Stock');
             } ,
@@ -146,17 +153,16 @@ var homePage = (function(){
         }else{
             $.ajax({
                 type: "POST",
-                data: JSON.stringify(stockUpdateDataModel),
+                data: JSON.stringify(dModel),
                 contentType: 'application/json',
                 url: 'http://localhost:3000/api/stock',
                 success: function(res){
                     var count = res[0].StockCount;
-                    console.log(JSON.stringify(res));
                     /** update current stock count and reset the count ui text */
                     $("#stockOnHand").text(count.toString() + ' Items in Stock');
                     count = 0;
                     $("#stockCountText").text(count.toString());
-                    stockUpdateDataModel.stockCount = count;
+                    dModel.stockCount = count;
                 },
                 error: function(res){
                     console.log('error');
@@ -181,9 +187,8 @@ var homePage = (function(){
      * @desc loads initial data model values and binds event handler functions to relative
      *       events.
      */
-    var init = function(stock, clinic){
-        dModel.stockName = stock;
-        dModel.clinicName = clinic;
+    var init = function(stock, clinic, user){
+        setDataModel(stock, clinic, user);
         loadStockList();
         functionBinds();
     }

@@ -34,6 +34,7 @@ router.post('/signin', function(req, res, next) {
                 res.json({
                         status: true,
                         clinic: req.user.Clinic,
+                        user: req.user.Username,
                         redirect: 'http://localhost:3000/admin/'
                     });
                 //return res.redirect('http://localhost:3000/admin/');
@@ -41,6 +42,7 @@ router.post('/signin', function(req, res, next) {
                 res.json({
                         status: true,
                         clinic: req.user.Clinic,
+                        user: req.user.Username,
                         redirect: 'http://localhost:3000/home'
                     });
                 //return res.redirect('/home');

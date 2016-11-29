@@ -9,7 +9,9 @@ signinPage = (function(){
             data: $("#loginForm").serialize(),
             url: 'http://localhost:3000/signin',
             success: function(res){
+                //TODO: prefere session data storage
                 localStorage.setItem('clinicName', res.clinic);
+                localStorage.setItem('userName', res.user);
                 window.location.replace(res.redirect);
             },
             error: function(res){

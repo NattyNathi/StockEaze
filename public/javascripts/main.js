@@ -4,6 +4,7 @@
 $(document).ready(function() {
     //global data model
     var stockUpdateDataModel = {
+        userName: null,
         clinicName: null,
         stockName: null,
         stockCount: null
@@ -12,9 +13,10 @@ $(document).ready(function() {
     //initialize home page module - stores returned clinic name in localstorage
     signinPage.init();
     stockUpdateDataModel.clinicName = localStorage.getItem("clinicName");
+    stockUpdateDataModel.userName = localStorage.getItem("userName");
 
     //initialize home page module
-    homePage.init(stockUpdateDataModel.stockName, stockUpdateDataModel.clinicName);
+    homePage.init(stockUpdateDataModel.stockName, stockUpdateDataModel.clinicName, stockUpdateDataModel.userName);
 
     loadAllClinics();
     //initialize levels page module
